@@ -35,7 +35,7 @@ Based in [City/Remote]. Working worldwide.
 Building G0DM0D3 — open-source multi-model AI chat. 
 Freelance AI systems engineer. 
 DMs open for projects.
-[your-portfolio-url]
+[https://alifromtheends.github.io/portfolio/]
 ```
 
 ---
@@ -61,7 +61,7 @@ Would you be open to a 10-minute call next week to see if there's a fit?
 
 Best,
 Ali
-[your-portfolio-url]
+[https://alifromtheends.github.io/portfolio/]
 ```
 
 ---
@@ -87,7 +87,7 @@ Typical agency engagement: $2,500–$5,000 per client deployment.
 Worth a 5-minute conversation?
 
 Ali
-[your-portfolio-url]
+[https://alifromtheends.github.io/portfolio/]
 ```
 
 ---
@@ -114,7 +114,7 @@ $1,000 flat fee. No hourly billing.
 Interested?
 
 Ali
-[your-portfolio-url]
+[https://alifromtheends.github.io/portfolio/]
 ```
 
 ---
@@ -196,7 +196,7 @@ I build AI systems that ship.
 ## Action Checklist (Do These Now)
 
 - [ ] Replace `your-email@example.com` in `index.html`
-- [ ] Replace `[your-portfolio-url]` in all listings
+- [ ] Replace `[https://alifromtheends.github.io/portfolio/]` in all listings
 - [ ] Update LinkedIn headline and About
 - [ ] Update Twitter/X bio
 - [ ] Update GitHub bio

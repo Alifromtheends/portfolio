@@ -1,6 +1,6 @@
 # Service Listings — Copy & Paste Ready
 
-> Post these on Upwork, Fiverr, Contra, or Twitter/X. Replace `[your-portfolio-url]` after you deploy.
+> Post these on Upwork, Fiverr, Contra, or Twitter/X. Replace `[https://alifromtheends.github.io/portfolio/]` after you deploy.
 
 ---
 
@@ -28,7 +28,7 @@ Tech: TypeScript, React (optional), vanilla JS, OpenRouter API, Docker
 
 I'm the creator of G0DM0D3, an open-source multi-model chat platform with 50+ model support and advanced features like auto-tuning and semantic transformation.
 
-Portfolio: [your-portfolio-url]
+Portfolio: [https://alifromtheends.github.io/portfolio/]
 GitHub: github.com/ali-bulatsalamov
 
 Ready to start within 48 hours. Message me your requirements.
@@ -105,7 +105,7 @@ Recent work: AICompanion — a native iOS AI assistant with seamless model switc
 
 I handle the entire stack from Xcode to TestFlight to App Store. You handle the vision.
 
-Portfolio: [your-portfolio-url]
+Portfolio: [https://alifromtheends.github.io/portfolio/]
 ```
 
 ---
@@ -127,7 +127,7 @@ Built Parseltongue (33 perturbation techniques, 3 intensity tiers) and ULTRAPLIN
 
 $1,000+ per audit. 3-5 day turnaround.
 
-DM me or book: [your-portfolio-url]
+DM me or book: [https://alifromtheends.github.io/portfolio/]
 ```
 
 ---
@@ -186,7 +186,7 @@ Custom AI interfaces. LLM integration. iOS AI apps.
 
 DM me if you're building with AI.
 
-Portfolio: [your-portfolio-url]
+Portfolio: [https://alifromtheends.github.io/portfolio/]
 ```
 
 Post this thread. It will attract inbound DMs from founders.

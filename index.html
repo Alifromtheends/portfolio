@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Bulatsalamov — AI Systems Engineer</title>
+<style>
+:root {
+  --bg: #050505;
+  --surface: #0a0a0a;
+  --surface-2: #111;
+  --border: #1a1a1a;
+  --text: #e0e0e0;
+  --text-dim: #888;
+  --accent: #00ff88;
+  --accent-dim: #00cc6a;
+  --accent-glow: rgba(0,255,136,0.15);
+  --danger: #ff3366;
+  --warning: #ffaa00;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'SF Mono', Monaco, Inconsolata, 'Fira Code', monospace;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--accent); color: var(--bg); }
+
+/* CRT scanline effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.03) 0px,
+    rgba(0,0,0,0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0; width: 100%;
+  background: rgba(5,5,5,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo { font-weight: 700; color: var(--accent); font-size: 0.9rem; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+.nav-links a:hover { color: var(--accent); }
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+.badge {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.4rem 1rem;
+  font-size: 0.7rem;
+  margin-bottom: 2rem;
+  letter-spacing: 0.1em;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 span { color: var(--accent); }
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 40px rgba(0,255,136,0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.btn-outline:hover { background: var(--accent); color: var(--bg); }
+
+/* Sections */
+section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+.section-title {
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.section-heading {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Projects */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.card:hover::before { transform: translateX(0); }
+.card:hover {
+  border-color: #333;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.card p { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 1rem; }
+
+.tag {
+  display: inline-block;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Services */
+.service-list { display: flex; flex-direction: column; gap: 1rem; }
+
+.service-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  transition: all 0.2s;
+}
+
+.service-item:hover { border-color: #333; background: var(--surface-2); }
+
+.service-info h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+.service-info p { color: var(--text-dim); font-size: 0.8rem; }
+
+.price { color: var(--accent); font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
+
+/* Pricing */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.pricing-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.pricing-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 40px var(--accent-glow);
+}
+
+.pricing-card.featured::before {
+  content: 'POPULAR';
+  position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.6rem;
+  padding: 0.3rem 1rem;
+  font-weight: 700;
+}
+
+.pricing-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.pricing-card .amount { font-size: 3rem; font-weight: 700; margin: 1rem 0; }
+.pricing-card .amount span { font-size: 1rem; color: var(--text-dim); }
+
+.pricing-features { list-style: none; text-align: left; margin: 2rem 0; }
+.pricing-features li {
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+}
+.pricing-features li::before {
+  content: '› ';
+  color: var(--accent);
+}
+
+/* Contact */
+.contact-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 3rem;
+  text-align: center;
+}
+
+.contact-box h2 { font-size: 2rem; margin-bottom: 1rem; }
+.contact-box p { color: var(--text-dim); margin-bottom: 2rem; }
+
+.email-big {
+  font-size: 1.5rem;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.email-big:hover { border-bottom-color: var(--accent); }
+
+.socials { margin-top: 2rem; display: flex; gap: 1.5rem; justify-content: center; }
+.socials a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+.socials a:hover { color: var(--accent); }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero h1 { font-size: 2rem; }
+  section { padding: 4rem 1.5rem; }
+  .service-item { flex-direction: column; align-items: flex-start; }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card, .service-item, .pricing-card {
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.service-item:nth-child(1) { animation-delay: 0.1s; }
+.service-item:nth-child(2) { animation-delay: 0.2s; }
+.service-item:nth-child(3) { animation-delay: 0.3s; }
+.service-item:nth-child(4) { animation-delay: 0.4s; }
+.service-item:nth-child(5) { animation-delay: 0.5s; }
+.pricing-card:nth-child(1) { animation-delay: 0.1s; }
+.pricing-card:nth-child(2) { animation-delay: 0.2s; }
+.pricing-card:nth-child(3) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">ALI_BULATSALAMOV</div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="badge">AVAILABLE FOR CONTRACT WORK</div>
+    <h1>I build <span>AI systems</span> that ship.</h1>
+    <p class="hero-sub">
+      Full-stack engineer specializing in multi-model AI interfaces, 
+      iOS applications, and privacy-first systems. Creator of <strong>G0DM0D3</strong> 
+      and <strong>AICompanion</strong>.
+    </p>
+    <div class="cta-group">
+      <a href="#contact" class="btn btn-primary">Start a Project →</a>
+      <a href="#work" class="btn btn-outline">View Work</a>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-title">Selected Work</div>
+  <h2 class="section-heading">Things I've built.</h2>
+  <div class="project-grid">
+    <div class="card">
+      <h3>G0DM0D3</h3>
+      <p>Open-source, privacy-respecting multi-model chat interface with 50+ LLMs via OpenRouter. Features red-teaming tools, auto-tuning, and 4 themes. Single-file deployment.</p>
+      <div>
+        <span class="tag">TypeScript</span>
+        <span class="tag">OpenRouter</span>
+        <span class="tag">Privacy</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>AICompanion</h3>
+      <p>Native iOS AI companion application built with Swift and SwiftUI. Designed for seamless on-device and cloud AI interactions.</p>
+      <div>
+        <span class="tag">Swift</span>
+        <span class="tag">SwiftUI</span>
+        <span class="tag">iOS</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>4TC Website</h3>
+      <p>Custom-built responsive web platform with bespoke JavaScript interactions and modern CSS architecture.</p>
+      <div>
+        <span class="tag">JavaScript</span>
+        <span class="tag">CSS</span>
+        <span class="tag">Web</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-title">Services</div>
+  <h2 class="section-heading">What I can build for you.</h2>
+  <div class="service-list">
+    <div class="service-item">
+      <div class="service-info">
+        <h3>Custom AI Chat Interface</h3>
+        <p>White-label multi-model chat dashboard with your branding, 50+ LLM support, and privacy controls.</p>
+      </div>
+      <div class="price">From $2,500</div>
+    </div>
+    <div class="service-item">
+      <div class="service-info">
+        <h3>LLM Integration & API Layer</h3>
+        <p>Connect Claude, GPT, Gemini, and open-source models into your product via OpenRouter or direct APIs.</p>
+      </div>
+      <div class="price">From $1,500</div>
+    </div>
+    <div class="service-item">
+      <div class="service-info">
+        <h3>iOS AI Application</h3>
+        <p>Native Swift/SwiftUI apps with AI capabilities, on-device inference, and App Store deployment.</p>
+      </div>
+      <div class="price">From $3,500</div>
+    </div>
+    <div class="service-item">
+      <div class="service-info">
+        <h3>Red Team & Prompt Engineering</h3>
+        <p>Security evaluation of AI systems, prompt injection testing, and adversarial robustness audits.</p>
+      </div>
+      <div class="price">From $1,000</div>
+    </div>
+    <div class="service-item">
+      <div class="service-info">
+        <h3>Full-Stack Web Application</h3>
+        <p>React/TypeScript frontends, Node.js/Python backends, Docker deployment, and CI/CD pipelines.</p>
+      </div>
+      <div class="price">From $2,000</div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="section-title">Packages</div>
+  <h2 class="section-heading">Simple pricing. No surprises.</h2>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <h3>Prototype</h3>
+      <div class="amount">$500<span>/project</span></div>
+      <ul class="pricing-features">
+        <li>Single-feature MVP</li>
+        <li>1 week delivery</li>
+        <li>1 revision round</li>
+        <li>Source code included</li>
+      </ul>
+      <a href="#contact" class="btn btn-outline" style="width:100%">Get Started</a>
+    </div>
+    <div class="pricing-card featured">
+      <h3>Product</h3>
+      <div class="amount">$2,500<span>/project</span></div>
+      <ul class="pricing-features">
+        <li>Full-featured build</li>
+        <li>2-3 week delivery</li>
+        <li>3 revision rounds</li>
+        <li>Deployment & docs</li>
+        <li>30-day support</li>
+      </ul>
+      <a href="#contact" class="btn btn-primary" style="width:100%">Most Popular</a>
+    </div>
+    <div class="pricing-card">
+      <h3>Retainer</h3>
+      <div class="amount">$1,500<span>/week</span></div>
+      <ul class="pricing-features">
+        <li>Dedicated capacity</li>
+        <li>Priority turnaround</li>
+        <li>Unlimited revisions</li>
+        <li>Slack/Discord access</li>
+        <li>Ongoing optimization</li>
+      </ul>
+      <a href="#contact" class="btn btn-outline" style="width:100%">Apply</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-box">
+    <h2>Let's build something.</h2>
+    <p>Tell me what you're working on. I'll respond within 24 hours.</p>
+    <a href="mailto:Alibulatsalamovv@gmail.com" class="email-big">Alibulatsalamovv@gmail.com</a>
+    <div class="socials">
+      <a href="https://github.com/ali-bulatsalamov" target="_blank">GitHub</a>
+      <a href="https://twitter.com/" target="_blank">Twitter/X</a>
+      <a href="https://linkedin.com/in/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Ali Bulatsalamov. Built with zero frameworks. Deploy anywhere.</p>
+</footer>
+
+<script>
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+
+// Copy email on click
+const emailLink = document.querySelector('.email-big');
+if (emailLink) {
+  emailLink.addEventListener('click', function(e) {
+    if (this.getAttribute('href') === 'mailto:Alibulatsalamovv@gmail.com') {
+      e.preventDefault();
+      alert('Replace Alibulatsalamovv@gmail.com with your real email in index.html, then deploy.');
+    }
+  });
+}
+</script>
+
+</body>
+</html>
